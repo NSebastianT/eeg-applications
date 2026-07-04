@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Spyder
+.spyproject/
+.spyderproject
+
+# Local EEG data
+data/raw/*
+data/processed/*
+
+# Keep data folders
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Local CSV files in project root
+*.csv

@@ -1,0 +1,8 @@
+brainflow
+numpy
+pandas
+matplotlib
+scipy
+mne
+pyqtgraph
+setuptools==80.10.2

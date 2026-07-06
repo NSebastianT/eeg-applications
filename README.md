@@ -58,6 +58,42 @@ Default input:
 
 `data/processed/muse2_labeled.csv`
 
+### `scripts/muse2_live_blink_viewer.py`
+
+Displays a live Muse 2 signal viewer for observing AF7 and AF8 activity in real time.
+
+This script was used to visually inspect blink-related spikes and other artifacts before improving the motor-control demo.
+
+### `scripts/muse2_blink_motor_serial.py`
+
+Reads live Muse 2 data through BrainFlow and uses intentional blink events as ON/OFF triggers for a DC motor through an ESP32 serial controller.
+
+This script is an early hardware-control demo and is not yet a robust BCI control system.
+
+## Firmware
+
+### `firmware/esp32_motor_serial_controller/esp32_motor_serial_controller.ino`
+
+ESP32 firmware that receives serial commands from Python and controls a DC motor through an L298N motor driver.
+
+Supported serial commands:
+
+`FWD <pwm>`
+
+`STOP`
+
+The firmware includes a safety timeout that stops the motor if new forward commands are not received within the configured timeout window.
+
+## Current hardware demo
+
+The repository now includes an initial hardware demo where intentional blink events captured through the Muse 2 frontal EEG channels are used as ON/OFF triggers for a DC motor.
+
+The current demo pipeline is:
+
+Muse 2 → Bluetooth Low Energy → Python / BrainFlow → serial USB → ESP32 → L298N motor driver → DC motor
+
+This is an early proof of concept. The blink detector is not yet robust and can still be affected by facial muscle activity, eyebrow movement, jaw movement, headset contact, and other artifacts.
+
 ## Repository data policy
 
 Raw EEG data files are not committed to the repository.
@@ -105,6 +141,6 @@ The recording produced:
 
 ## Notes
 
-This repository currently contains the initial acquisition pipeline only.
+This repository currently contains the initial acquisition pipeline, a live signal viewer, and an early blink-based motor ON/OFF demo.
 
-Filtering, frequency-band analysis, machine learning, ROS2, Raspberry Pi integration, and hardware control have not been implemented yet.
+Filtering, frequency-band analysis, machine learning, ROS2, Raspberry Pi integration, robust hardware control, and reliable cognitive-state control have not been implemented yet.
